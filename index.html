@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    }
+
+    body {
+      background-image: radial-gradient(circle at 1px 1px,#D1D5DB 1px,transparent 1px);
+      background-size:24px 24px;
+      color: #333;
+      line-height: 1.6;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 40px 20px;
+    }
+
+    .hero {
+      text-align: center;
+      margin-bottom: 60px;
+      padding: 40px 20px;
+      background: linear-gradient(135deg, #6366F1, #8B5CF6);
+      border-radius: 16px;
+      color: white;
+    }
+
+    .hero h1 {
+      font-size: 48px;
+      margin-bottom: 16px;
+    }
+
+    .hero p {
+      font-size: 18px;
+      opacity: 0.9;
+    }
+
+    .section {
+      background: white;
+      border-radius: 16px;
+      padding: 32px;
+      margin-bottom: 32px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+    }
+
+    .section-title {
+      font-size: 28px;
+      margin-bottom: 24px;
+      padding-bottom: 16px;
+      border-bottom: 2px solid #f3f4f6;
+      color: #1F2937;
+    }
+
+    .subsection-title {
+      font-size: 20px;
+      margin: 32px 0 20px;
+      color: #374151;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 24px;
+      margin: 20px 0;
+    }
+
+    .card {
+      background: #f8f9fa;
+      border-radius: 12px;
+      padding: 24px;
+      border: 1px solid #eee;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
+
+    .field-name {
+      font-family: monospace;
+      font-size: 18px;
+      font-weight: 600;
+      color: #6366F1;
+      margin-bottom: 12px;
+    }
+
+    .tag {
+      display: inline-block;
+      padding: 4px 12px;
+      border-radius: 100px;
+      font-size: 13px;
+      margin-left: 8px;
+      vertical-align: middle;
+    }
+
+    .required {
+      background: #FFE4E8;
+      color: #E11D48;
+    }
+
+    .optional {
+      background: #E0E7FF;
+      color: #4338CA;
+    }
+
+    .guaranteed {
+      background: #DCFCE7;
+      color: #166534;
+    }
+
+    .field-desc {
+      color: #666;
+      margin-bottom: 16px;
+    }
+
+    .field-spec {
+      background: #1F2937;
+      color: #fff;
+      padding: 12px 16px;
+      border-radius: 8px;
+      font-family: monospace;
+      font-size: 14px;
+    }
+
+    .example {
+      background: #F3F4F6;
+      padding: 20px;
+      border-radius: 8px;
+      margin-top: 20px;
+    }
+
+    .example-title {
+      font-weight: 600;
+      color: #4B5563;
+      margin-bottom: 12px;
+    }
+
+    .example-code {
+      background: #1F2937;
+      color: #fff;
+      padding: 16px;
+      border-radius: 8px;
+      font-family: monospace;
+      overflow-x: auto;
+      white-space: pre;
+      font-size: 14px;
+      line-height: 1.4;
+    }
+
+    .note {
+      background: #E0E7FF;
+      border-left: 4px solid #6366F1;
+      padding: 16px;
+      margin: 20px 0;
+      border-radius: 0 8px 8px 0;
+    }
+
+    .note strong {
+      color: #4338CA;
+    }
+
+    .note code {
+      background: rgba(99, 102, 241, 0.1);
+      padding: 2px 6px;
+      border-radius: 4px;
+      font-family: monospace;
+    }
+
+    .steps {
+      margin: 20px 0;
+      padding-left: 20px;
+    }
+
+    .steps li {
+      margin-bottom: 12px;
+      color: #4B5563;
+    }
+
+    ul {
+      list-style-type: disc;
+      padding-left: 20px;
+      margin-top: 8px;
+    }
+
+    ul li {
+      margin-bottom: 4px;
+      color: #4B5563;
+    }
+
+    @media (max-width: 640px) {
+      .grid {
+        grid-template-columns: 1fr;
+      }
+      
+      .hero {
+        padding: 32px 16px;
+      }
+      
+      .hero h1 {
+        font-size: 36px;
+      }
+
+      .section {
+        padding: 24px;
+      }
+
+      .section-title {
+        font-size: 24px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="hero">
+      <h1>Widget Documentation</h1>
+      <p>Complete guide to creating, configuring, and listing widgets</p>
+    </div>
+
+    <div class="section">
+      <h2 class="section-title">Schema Definition</h2>
+      <p>Every widget requires a JSON schema definition with the following fields:</p>
+      
+      <h3 class="subsection-title">Required Fields</h3>
+      <div class="grid">
+        <div class="card">
+          <div class="field-name">
+            url
+            <span class="tag required">Required</span>
+          </div>
+          <p class="field-desc">HTTPS URL where the widget is hosted. Only node_id parameter is guaranteed to be passed.</p>
+          <div class="field-spec">Type: string
+Format: URI
+Must start with https://</div>
+        </div>
+
+        <div class="card">
+          <div class="field-name">
+            name
+            <span class="tag required">Required</span>
+          </div>
+          <p class="field-desc">Display name of the widget.</p>
+          <div class="field-spec">Type: string
+Length: 3-50 characters</div>
+        </div>
+
+        <div class="card">
+          <div class="field-name">
+            id
+            <span class="tag required">Required</span>
+          </div>
+          <p class="field-desc">Unique identifier for the widget. Must contain only lowercase letters, numbers, and hyphens.</p>
+          <div class="field-spec">Type: string
+Pattern: ^[a-z0-9-]+$</div>
+        </div>
+      </div>
+
+      <h3 class="subsection-title">Optional Fields</h3>
+      <div class="grid">
+        <div class="card">
+          <div class="field-name">
+            version
+            <span class="tag optional">Optional</span>
+          </div>
+          <p class="field-desc">Semantic version number of the widget. Defaults to "1.0.0" if not provided.</p>
+          <div class="field-spec">Type: string
+Pattern: X.Y.Z (e.g., 1.0.0)</div>
+        </div>
+
+        <div class="card">
+          <div class="field-name">
+            description
+            <span class="tag optional">Optional</span>
+          </div>
+          <p class="field-desc">Detailed description of the widget's functionality.</p>
+          <div class="field-spec">Type: string
+Length: 10-500 characters</div>
+        </div>
+
+        <div class="card">
+          <div class="field-name">
+            icon
+            <span class="tag optional">Optional</span>
+          </div>
+          <p class="field-desc">HTTPS URL to the widget's icon. A default icon will be used if not provided.</p>
+          <div class="field-spec">Type: string
+Format: URI
+Must start with https://</div>
+        </div>
+
+        <div class="card">
+          <div class="field-name">
+            tags
+            <span class="tag optional">Optional</span>
+          </div>
+          <p class="field-desc">Array of tags for categorizing the widget.</p>
+          <div class="field-spec">Type: array of strings
+Example: ["productivity", "timer"]</div>
+        </div>
+
+        <div class="card">
+          <div class="field-name">
+            author
+            <span class="tag optional">Optional</span>
+          </div>
+          <p class="field-desc">Information about the widget creator.</p>
+          <div class="field-spec">Type: object
+{
+  "name": string,
+  "url": string (optional)
+}</div>
+        </div>
+      </div>
+
+      <div class="example">
+        <div class="example-title">Complete Schema Example:</div>
+        <div class="example-code">{
+  "id": "pomodoro-timer",
+  "name": "Pomodoro Timer",
+  "url": "https://example.com/widgets/pomodoro",
+  "version": "1.0.0",
+  "description": "A customizable Pomodoro timer",
+  "icon": "https://example.com/widgets/pomodoro/icon.svg",
+  "tags": ["productivity", "timer"],
+  "author": {
+    "name": "Jane Doe",
+    "url": "https://github.com/janedoe"
+  }
+}</div>
+      </div>
+    </div>
+
+    <div class="section">
+      <h2 class="section-title">URL Parameters</h2>
+      <div class="note">
+        <strong>Important:</strong> Only the <code>node_id</code> parameter is guaranteed to be passed to your widget URL. Other parameters may or may not be present.
+      </div>
+
+      <div class="grid">
+        <div class="card">
+          <div class="field-name">
+            node_id
+            <span class="tag guaranteed">Guaranteed</span>
+          </div>
+          <p class="field-desc">Unique identifier for the widget instance. Use this to load and save widget state.</p>
+          <div class="field-spec">Type: string
+Example: "abc123"</div>
+        </div>
+
+        <div class="card">
+          <div class="field-name">
+            theme
+            <span class="tag optional">Not Guaranteed</span>
+          </div>
+          <p class="field-desc">Visual theme preference. Implement fallback behavior if not provided.</p>
+          <div class="field-spec">Possible values:
+- light
+- dark
+- system</div>
+        </div>
+
+        <div class="card">
+          <div class="field-name">
+            width/height
+            <span class="tag optional">Not Guaranteed</span>
+          </div>
+          <p class="field-desc">Desired dimensions. Implement responsive behavior if not provided.</p>
+          <div class="field-spec">Type: number
+Example: width=800, height=600</div>
+        </div>
+      </div>
+
+      <div class="example">
+        <div class="example-title">Example URL:</div>
+        <div class="example-code">https://example.com/widget?node_id=abc123&theme=dark&width=800&height=600</div>
+      </div>
+    </div>
+
+    <div class="section">
+      <h2 class="section-title">Widget Directory Structure</h2>
+      
+      <div class="example">
+        <div class="example-title">Repository Structure:</div>
+        <div class="example-code">widgets/
+├── README.md              # Documentation
+├── schema.json           # JSON Schema for validation
+└── widgets/
+    ├── widget-one/       # Each widget in its own directory
+    │   └── widget.json   # Widget definition file
+    └── widget-two/
+        └── widget.json</div>
+      </div>
+
+      <h3 class="subsection-title">Adding a New Widget</h3>
+      <ol class="steps">
+        <li>Fork the repository</li>
+        <li>Create a new directory under widgets/ with your widget name</li>
+        <li>Add your widget.json with the required fields</li>
+        <li>Submit a pull request</li>
+      </ol>
+
+      <div class="note">
+        <strong>Automated Validation:</strong>
+        <p>All widget submissions are automatically validated for:</p>
+        <ul>
+          <li>Schema compliance</li>
+          <li>Unique widget IDs</li>
+          <li>Valid URLs</li>
+          <li>Proper directory structure</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
