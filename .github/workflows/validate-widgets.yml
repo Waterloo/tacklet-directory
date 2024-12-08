@@ -1,0 +1,105 @@
+name: Validate Widget Submission
+
+on:
+  pull_request:
+    paths:
+      - 'widgets/**'
+      - 'schema.json'
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install dependencies
+        run: npm install -g ajv-cli ajv-formats
+
+      - name: Find modified widget files
+        id: changed-files
+        uses: tj-actions/changed-files@v42
+        with:
+          files: widgets/**/widget.json
+
+      - name: Validate JSON Schema
+        run: |
+          for file in ${{ steps.changed-files.outputs.all_modified_files }}; do
+            echo "Validating $file"
+            ajv validate -s schema.json -d "$file" --all-errors
+          done
+
+      - name: Check for duplicate IDs
+        run: |
+          echo "Checking for duplicate widget IDs..."
+          duplicate_ids=$(find widgets -name widget.json -exec jq -r .id {} \; | sort | uniq -d)
+          if [ ! -z "$duplicate_ids" ]; then
+            echo "Error: Found duplicate widget IDs:"
+            echo "$duplicate_ids"
+            exit 1
+          fi
+
+      - name: Validate URLs
+        run: |
+          for file in ${{ steps.changed-files.outputs.all_modified_files }}; do
+            url=$(jq -r .url "$file")
+            icon_url=$(jq -r .icon "$file")
+            
+            echo "Checking URL: $url"
+            curl --fail --location --head "$url" || exit 1
+            
+            echo "Checking icon URL: $icon_url"
+            curl --fail --location --head "$icon_url" || exit 1
+          done
+
+      - name: Validate version format
+        run: |
+          for file in ${{ steps.changed-files.outputs.all_modified_files }}; do
+            version=$(jq -r .version "$file")
+            if [[ ! $version =~ ^[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
+              echo "Error: Invalid version format in $file. Must be semver (e.g., 1.0.0)"
+              exit 1
+            fi
+          done
+
+      - name: Check file structure
+        run: |
+          for file in ${{ steps.changed-files.outputs.all_modified_files }}; do
+            dir=$(dirname "$file")
+            if [ ! -f "$dir/widget.json" ]; then
+              echo "Error: Missing widget.json in $dir"
+              exit 1
+            fi
+          done
+
+      - name: Validate icon size and format
+        run: |
+          for file in ${{ steps.changed-files.outputs.all_modified_files }}; do
+            icon_url=$(jq -r .icon "$file")
+            
+            # Download icon to temporary file
+            temp_file=$(mktemp)
+            curl -L -o "$temp_file" "$icon_url"
+            
+            # Check file size (max 100KB)
+            size=$(stat -f%z "$temp_file")
+            if [ $size -gt 102400 ]; then
+              echo "Error: Icon size exceeds 100KB limit"
+              exit 1
+            fi
+            
+            # Check file format (must be SVG, PNG, or JPEG)
+            mime_type=$(file -b --mime-type "$temp_file")
+            if [[ "$mime_type" != "image/svg+xml" && 
+                  "$mime_type" != "image/png" && 
+                  "$mime_type" != "image/jpeg" ]]; then
+              echo "Error: Icon must be SVG, PNG, or JPEG format"
+              exit 1
+            fi
+            
+            rm "$temp_file"
+          done
