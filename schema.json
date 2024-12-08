@@ -11,26 +11,164 @@
     "name": {
       "type": "string",
       "minLength": 3,
-      "maxLength": 50
+      "maxLength": 50,
+      "description": "Display name of the widget"
     },
     "version": {
       "type": "string",
-      "pattern": "^\\d+\\.\\d+\\.\\d+$"
+      "pattern": "^\\d+\\.\\d+\\.\\d+$",
+      "description": "Semantic version of the widget"
     },
     "url": {
       "type": "string",
       "format": "uri",
-      "pattern": "^https://"
+      "pattern": "^https://",
+      "description": "HTTPS URL where the widget is hosted"
     },
     "description": {
       "type": "string",
       "minLength": 10,
-      "maxLength": 500
+      "maxLength": 500,
+      "description": "Detailed description of the widget's functionality"
     },
     "icon": {
       "type": "string",
       "format": "uri",
-      "pattern": "^https://"
+      "pattern": "^https://",
+      "description": "HTTPS URL to the widget's icon"
+    },
+    "author": {
+      "type": "object",
+      "required": ["name", "email"],
+      "properties": {
+        "name": {
+          "type": "string",
+          "minLength": 1,
+          "description": "Name of the widget author or organization"
+        },
+        "email": {
+          "type": "string",
+          "format": "email",
+          "description": "Contact email for widget support"
+        },
+        "url": {
+          "type": "string",
+          "format": "uri",
+          "pattern": "^https://",
+          "description": "URL to author's website or profile"
+        }
+      }
+    },
+    "repository": {
+      "type": "object",
+      "required": ["type", "url"],
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": ["git", "svn", "mercurial"],
+          "description": "Type of version control system"
+        },
+        "url": {
+          "type": "string",
+          "format": "uri",
+          "pattern": "^https://",
+          "description": "URL to the source code repository"
+        }
+      }
+    },
+    "tags": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "pattern": "^[a-z0-9-]+$"
+      },
+      "minItems": 1,
+      "uniqueItems": true,
+      "description": "Categories and keywords for the widget"
+    },
+    "dimensions": {
+      "type": "object",
+      "required": ["minWidth", "minHeight", "defaultWidth", "defaultHeight"],
+      "properties": {
+        "minWidth": {
+          "type": "number",
+          "minimum": 50,
+          "description": "Minimum width in pixels"
+        },
+        "minHeight": {
+          "type": "number",
+          "minimum": 50,
+          "description": "Minimum height in pixels"
+        },
+        "defaultWidth": {
+          "type": "number",
+          "minimum": 50,
+          "description": "Default width in pixels"
+        },
+        "defaultHeight": {
+          "type": "number",
+          "minimum": 50,
+          "description": "Default height in pixels"
+        }
+      }
+    },
+    "config": {
+      "type": "object",
+      "required": ["allowResize", "allowInteraction", "requiredPermissions"],
+      "properties": {
+        "allowResize": {
+          "type": "boolean",
+          "description": "Whether the widget can be resized"
+        },
+        "allowInteraction": {
+          "type": "boolean",
+          "description": "Whether the widget accepts user interaction"
+        },
+        "requiredPermissions": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": ["notifications", "storage", "audio", "clipboard", "camera", "microphone"]
+          },
+          "uniqueItems": true,
+          "description": "List of required browser permissions"
+        }
+      }
+    },
+    "documentation": {
+      "type": "object",
+      "required": ["usage"],
+      "properties": {
+        "usage": {
+          "type": "string",
+          "format": "uri",
+          "pattern": "^https://",
+          "description": "URL to usage documentation"
+        },
+        "api": {
+          "type": "string",
+          "format": "uri",
+          "pattern": "^https://",
+          "description": "URL to API documentation"
+        }
+      }
+    },
+    "released": {
+      "type": "string",
+      "format": "date",
+      "description": "Initial release date of the widget"
+    },
+    "lastUpdated": {
+      "type": "string",
+      "format": "date",
+      "description": "Date of the last update"
+    },
+    "changelog": {
+      "type": "string",
+      "format": "uri",
+      "pattern": "^https://",
+      "description": "URL to the changelog"
     }
-  }
+  },
+  "additionalProperties": false
 }
