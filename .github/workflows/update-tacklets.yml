@@ -9,10 +9,15 @@ on:
 jobs:
   update-tacklets-json:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write  # This is needed for pushing to the repository
     
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          fetch-depth: 0  # Fetch all history to avoid shallow clone issues
       
       - name: Set up Node.js
         uses: actions/setup-node@v3
@@ -28,8 +33,16 @@ jobs:
       
       - name: Commit and push if changed
         run: |
-          git config --local user.email "action@github.com"
-          git config --local user.name "GitHub Action"
+          git config --local user.email "github-actions[bot]@users.noreply.github.com"
+          git config --local user.name "github-actions[bot]"
           git add directory/tacklets.json
-          git diff --quiet && git diff --staged --quiet || git commit -m "Update tacklets.json"
-          git push
+          # Check if there are changes to commit
+          if git diff --staged --quiet; then
+            echo "No changes to commit"
+          else
+            git commit -m "Update tacklets.json [skip ci]"
+            # Push using the built-in token
+            git push
+          fi
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
