@@ -31,7 +31,6 @@
     "allowInteraction": true
   },
   "permissions": [
-    "allow-fullscreen",
-    "allow-list"
+    "allow-fullscreen"
   ]
 }
