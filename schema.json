@@ -114,7 +114,7 @@
     },
     "config": {
       "type": "object",
-      "required": ["allowResize", "allowInteraction", "requiredPermissions"],
+      "required": ["allowResize", "allowInteraction"],
       "properties": {
         "allowResize": {
           "type": "boolean",
@@ -123,51 +123,17 @@
         "allowInteraction": {
           "type": "boolean",
           "description": "Whether the widget accepts user interaction"
-        },
-        "requiredPermissions": {
-          "type": "array",
-          "items": {
-            "type": "string",
-            "enum": ["notifications", "storage", "audio", "clipboard", "camera", "microphone"]
-          },
-          "uniqueItems": true,
-          "description": "List of required browser permissions"
         }
       }
     },
-    "documentation": {
-      "type": "object",
-      "required": ["usage"],
-      "properties": {
-        "usage": {
-          "type": "string",
-          "format": "uri",
-          "pattern": "^https://",
-          "description": "URL to usage documentation"
-        },
-        "api": {
-          "type": "string",
-          "format": "uri",
-          "pattern": "^https://",
-          "description": "URL to API documentation"
-        }
-      }
-    },
-    "released": {
-      "type": "string",
-      "format": "date",
-      "description": "Initial release date of the widget"
-    },
-    "lastUpdated": {
-      "type": "string",
-      "format": "date",
-      "description": "Date of the last update"
-    },
-    "changelog": {
-      "type": "string",
-      "format": "uri",
-      "pattern": "^https://",
-      "description": "URL to the changelog"
+    "permissions": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "enum": ["allow-list", "allow-upload", "allow-fullscreen"]
+      },
+      "uniqueItems": true,
+      "description": "List of permissions required by the widget"
     }
   },
   "additionalProperties": false
