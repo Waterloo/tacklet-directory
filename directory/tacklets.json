@@ -1,42 +1,39 @@
 [
   {
-    "name": "doodletack.json",
-    "path": "tacklets/doodletack.json",
-    "data": {
-      "id": "doodletack",
-      "name": "DoodleTack",
-      "version": "1.0.0",
-      "url": "https://doodletack.tackpad.xyz/",
-      "description": "A lightweight and intuitive drawing widget for Tackpad, designed for quick sketches, annotations, and visual brainstorming. Whether you're jotting down ideas or making simple diagrams, DoodleTack offers a seamless drawing experience inside Tackpad's freeform canvas.",
-      "icon": "https://doodletack.tackpad.xyz/icon.png",
-      "author": {
-        "name": "Tackpad",
-        "email": "support@tackpad.xyz",
-        "url": "https://tackpad.xyz"
-      },
-      "repository": {
-        "type": "git",
-        "url": "https://github.com/tackpad/doodletack"
-      },
-      "tags": [
-        "drawing",
-        "sketch",
-        "annotation",
-        "brainstorming"
-      ],
-      "dimensions": {
-        "minWidth": 200,
-        "minHeight": 150,
-        "defaultWidth": 400,
-        "defaultHeight": 300
-      },
-      "config": {
-        "allowResize": true,
-        "allowInteraction": true
-      },
-      "permissions": [
-        "allow-fullscreen"
-      ]
-    }
+    "id": "doodletack",
+    "name": "DoodleTack",
+    "version": "1.0.0",
+    "url": "https://doodletack.tackpad.xyz/",
+    "description": "A lightweight and intuitive drawing widget for Tackpad, designed for quick sketches, annotations, and visual brainstorming. Whether you're jotting down ideas or making simple diagrams, DoodleTack offers a seamless drawing experience inside Tackpad's freeform canvas.",
+    "icon": "https://doodletack.tackpad.xyz/icon.png",
+    "author": {
+      "name": "Tackpad",
+      "email": "support@tackpad.xyz",
+      "url": "https://tackpad.xyz"
+    },
+    "repository": {
+      "type": "git",
+      "url": "https://github.com/tackpad/doodletack"
+    },
+    "tags": [
+      "drawing",
+      "sketch",
+      "annotation",
+      "brainstorming",
+      "doodle"
+    ],
+    "dimensions": {
+      "minWidth": 200,
+      "minHeight": 150,
+      "defaultWidth": 400,
+      "defaultHeight": 300
+    },
+    "config": {
+      "allowResize": true,
+      "allowInteraction": true
+    },
+    "permissions": [
+      "allow-fullscreen"
+    ]
   }
 ]
