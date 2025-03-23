@@ -35,11 +35,7 @@ function readFilesFromDirectory(directory) {
         }
         
         // Add file metadata
-        results.push({
-          name: file.name,
-          path: filePath,
-          data: data
-        });
+        results.push(data);
       } catch (error) {
         console.error(`Error reading file ${filePath}: ${error.message}`);
       }
