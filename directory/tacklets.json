@@ -35,5 +35,40 @@
     "permissions": [
       "allow-fullscreen"
     ]
+  },
+  {
+    "id": "joticalc",
+    "name": "JotiCalc",
+    "version": "1.0.0",
+    "url": "https://joticalc.tackpad.xyz",
+    "description": "A fast, no-fuss calculation widget for Tackpad — perfect for instant math like scribbling on the back of a napkin. JotiCalc delivers real-time answers with zero friction inside Tackpad's freeform canvas.",
+    "icon": "https://joticalc.tackpad.xyz/JotiCalc.png",
+    "author": {
+      "name": "Tackpad",
+      "email": "support@tackpad.xyz",
+      "url": "https://tackpad.xyz"
+    },
+    "repository": {
+      "type": "git",
+      "url": "https://github.com/tackpad/joticalc"
+    },
+    "tags": [
+      "calculator",
+      "math",
+      "quick-math",
+      "napkin-math",
+      "widget"
+    ],
+    "dimensions": {
+      "minWidth": 180,
+      "minHeight": 120,
+      "defaultWidth": 320,
+      "defaultHeight": 200
+    },
+    "config": {
+      "allowResize": true,
+      "allowInteraction": true
+    },
+    "permissions": []
   }
 ]
