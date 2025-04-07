@@ -1,0 +1,37 @@
+{
+  "id": "snipzy",
+  "name": "Snipzy",
+  "version": "1.0.0",
+  "url": "https://snipzy.vercel.app/",
+  "description": "A simple code editor snippet app for Tackpad, designed for efficient code management and sharing. Save, organize, and access your code snippets quickly within Tackpad's freeform canvas.",
+  "icon": "https://snipzy.vercel.app/snipzy_logo.svg",
+  "author": {
+    "name": "darkwebplayer",
+    "email": "darkwebplayer101@gmail.com",
+    "url": "https://github.com/Darkwebplayer"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Darkwebplayer/snipzy-tacklet"
+  },
+  "tags": [
+    "code",
+    "snippets",
+    "editor",
+    "programming",
+    "development"
+  ],
+  "dimensions": {
+    "minWidth": 500,
+    "minHeight": 280,
+    "defaultWidth": 550,
+    "defaultHeight": 280
+  },
+  "config": {
+    "allowResize": true,
+    "allowInteraction": true
+  },
+  "permissions": [
+    "allow-fullscreen",
+  ]
+}
