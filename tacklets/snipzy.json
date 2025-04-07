@@ -33,5 +33,6 @@
   },
   "permissions": [
     "allow-fullscreen",
+    "clipboard-write"
   ]
 }
