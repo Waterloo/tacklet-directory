@@ -70,5 +70,42 @@
       "allowInteraction": true
     },
     "permissions": []
+  },
+  {
+    "id": "tactical",
+    "name": "TactiCal Tackpad",
+    "version": "1.0.0",
+    "url": "https://tactical.tackpad.xyz",
+    "description": "A tactical planning and coordination dashboard for teams to manage mission timelines, tasks, schedules, and personnel. Designed for operational planning and coordination with features for tracking mission phases, team assignments, calendars, and roster management.",
+    "icon": "https://tactical.tackpad.xyz/TacktiCal.png",
+    "author": {
+      "name": "Tackpad Team",
+      "email": "support@tackpad.xyz",
+      "url": "https://tackpad.xyz"
+    },
+    "repository": {
+      "type": "git",
+      "url": "https://github.com/Waterloo/TacktiCal"
+    },
+    "tags": [
+      "tactical",
+      "planning",
+      "calender",
+      "schedule"
+    ],
+    "dimensions": {
+      "minWidth": 524,
+      "minHeight": 400,
+      "defaultWidth": 524,
+      "defaultHeight": 600
+    },
+    "config": {
+      "allowResize": true,
+      "allowInteraction": true
+    },
+    "permissions": [
+      "allow-list",
+      "allow-fullscreen"
+    ]
   }
 ]
