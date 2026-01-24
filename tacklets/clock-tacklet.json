@@ -1,0 +1,34 @@
+{
+    "id": "clock-tacklet",
+    "name": "Clock Tacklet",
+    "version": "1.0.0",
+    "url": "https://waterloo.github.io/Clock-Tacklet/",
+    "description": "A premium world clock widget with multiple timezone support.",
+    "icon": "https://waterloo.github.io/Clock-Tacklet/icon.png",
+    "author": {
+        "name": "Waterloo",
+        "email": "support@waterloo.xyz",
+        "url": "https://github.com/Waterloo"
+    },
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/Waterloo/Clock-Tacklet"
+    },
+    "tags": [
+        "clock",
+        "time",
+        "world-clock",
+        "timezone"
+    ],
+    "dimensions": {
+        "minWidth": 300,
+        "minHeight": 200,
+        "defaultWidth": 400,
+        "defaultHeight": 300
+    },
+    "config": {
+        "allowResize": true,
+        "allowInteraction": true
+    },
+    "permissions": []
+}
